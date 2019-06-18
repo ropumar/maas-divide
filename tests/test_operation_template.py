@@ -1,6 +1,6 @@
 from asynctest import skip
 
-from maas.app import app
+from maas.app import app, division
 from tests.base import BaseApiTestCase
 
 
@@ -16,3 +16,8 @@ class OperationTest(BaseApiTestCase):
         self.assertEqual(200, result.status)
         data = await result.json()
         self.assertEqual({"result": 1}, data)
+
+    def test_operatio_devision_division_by_zero(self):
+        with self.assertRaises(Exception) as context:
+            result = division(10, 0)
+            self.assertRaises("Division by zero", str(context.exception))
