@@ -8,16 +8,16 @@ app = App("", "", "", 1)
 async def operation(request: web.Request):
     data = await request.json()
     try:
-        result = division (data['left'],data['right'])
-        if type(result)!=int:
+        result = division(data["left"], data["right"])
+        if type(result) != int:
             result = int(result)
-        myjson = {'result': result}
+        myjson = {"result": result}
     except:
-        myjson={}
+        myjson = {}
     return web.json_response(myjson)
 
-def division(a, b):
-    if b==0:
-        raise Exception("Division by zero")
-    return a/b
 
+def division(a, b):
+    if b == 0:
+        raise Exception("Division by zero")
+    return a / b
