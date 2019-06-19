@@ -17,7 +17,9 @@ class OperationTest(BaseApiTestCase):
         data = await result.json()
         self.assertEqual({"result": 4}, data)
 
-    def test_operatio_devision_division_by_zero(self):
-        with self.assertRaises(Exception) as context:
-            result = division(10, 0)
-            self.assertRaises("Division by zero", str(context.exception))
+    async def test_operatio_devision_division_by_zero(self):
+        result = await self.client.post("/", json={"left": 20, "right": 0})
+        self.assertEqual(200, result.status)
+        data = await result.json()
+        self.assertEqual({"result": "Division by zero"}, data)
+
